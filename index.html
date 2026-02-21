@@ -1,11 +1,58 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Luis Martinez - Full Stack Developer</title>
+    <meta name="description" content="Luis Martinez - Full Stack Developer with 5+ years of experience. React, Node.js, TypeScript, React Native. Based in Santo Domingo, Dominican Republic." />
+    <meta name="keywords" content="Luis Martinez, Full Stack Developer, React, Node.js, TypeScript, React Native, Vue.js, Frontend, Backend, Santo Domingo" />
+    <meta name="author" content="Luis Martinez" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.luismartinez.site/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0f172a" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.luismartinez.site/" />
+    <meta property="og:title" content="Luis Martinez - Full Stack Developer" />
+    <meta property="og:description" content="Full Stack Developer with 5+ years of experience. React, Node.js, TypeScript, React Native. Based in Santo Domingo, Dominican Republic." />
+    <meta property="og:image" content="https://www.luismartinez.site/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Luis Martinez Resume" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.luismartinez.site/" />
+    <meta name="twitter:title" content="Luis Martinez - Full Stack Developer" />
+    <meta name="twitter:description" content="Full Stack Developer with 5+ years of experience. React, Node.js, TypeScript, React Native. Based in Santo Domingo." />
+    <meta name="twitter:image" content="https://www.luismartinez.site/og-image.png" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Luis Martinez",
+      "jobTitle": "Full Stack Developer",
+      "url": "https://www.luismartinez.site",
+      "email": "louislam09@hotmail.com",
+      "telephone": "+1-829-286-7606",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santo Domingo",
+        "addressCountry": "Dominican Republic"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/luis-alejandro-martinez-magallanes-643aba207",
+        "https://github.com/Louislam09"
+      ],
+      "knowsAbout": ["React", "Node.js", "TypeScript", "React Native", "Vue.js", "Python", "C#", ".NET"]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -200,6 +247,31 @@
       .theme-toggle svg {
         width: 18px;
         height: 18px;
+      }
+
+      .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        border-radius: var(--radius);
+        border: 1px solid var(--gray-700);
+        background: var(--gray-900);
+        color: var(--foreground);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+
+      .lang-toggle:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .lang-toggle .active {
+        color: var(--accent);
       }
 
       /* Header / Hero */
@@ -1018,14 +1090,19 @@
     <div class="container">
       <nav class="top-bar">
         <div class="nav-links">
-          <a href="#profile">Profile</a>
-          <a href="#employment">Experience</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#education">Education</a>
-          <a href="#references">References</a>
+          <a href="#profile" data-i18n="nav.profile">Profile</a>
+          <a href="#employment" data-i18n="nav.experience">Experience</a>
+          <a href="#skills" data-i18n="nav.skills">Skills</a>
+          <a href="#projects" data-i18n="nav.projects">Projects</a>
+          <a href="#education" data-i18n="nav.education">Education</a>
+          <a href="#references" data-i18n="nav.references">References</a>
         </div>
         <div class="top-actions">
+          <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+            <span class="lang-en active" data-lang-btn="en">EN</span>
+            <span class="lang-sep">/</span>
+            <span class="lang-es" data-lang-btn="es">ES</span>
+          </button>
           <a
             href="Luis Martinez - Resume - Full Stack Developer.pdf"
             download
@@ -1046,7 +1123,7 @@
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Download PDF
+            <span data-i18n="downloadPdf">Download PDF</span>
           </a>
           <button
             type="button"
@@ -1091,8 +1168,8 @@
         <div class="hero-wrapper">
           <h1 class="name">Luis Martinez</h1>
           <div class="title-row">
-            <p class="title">Full Stack Developer</p>
-            <span class="exp-stat">5+ years experience</span>
+            <p class="title" data-i18n="title">Full Stack Developer</p>
+            <span class="exp-stat" data-i18n="expStat">5+ years experience</span>
           </div>
         </div>
         <div class="contact-row">
@@ -1126,17 +1203,11 @@
             +1 (829) 286-7606
           </a>
           <span class="contact-badge">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
               <circle cx="12" cy="10" r="3" />
             </svg>
-            Santo Domingo, Dominican Republic
+            <span data-i18n="location">Santo Domingo, Dominican Republic</span>
           </span>
           <a
             href="https://www.linkedin.com/in/luis-alejandro-martinez-magallanes-643aba207"
@@ -1183,8 +1254,8 @@
 
       <main>
         <section class="section" id="profile">
-          <h2 class="section-title">Profile</h2>
-          <div class="profile-box">
+          <h2 class="section-title" data-i18n="sections.profile">Profile</h2>
+          <div class="profile-box" data-i18n="profile.text">
             Dynamic Full-Stack Developer with 5 years of experience delivering
             innovative solutions across web and mobile applications. Expertise
             in enhancing user experiences through robust feature implementation
@@ -1198,14 +1269,14 @@
         </section>
 
         <section class="section" id="employment">
-          <h2 class="section-title">Employment History</h2>
+          <h2 class="section-title" data-i18n="sections.employment">Employment History</h2>
           <div class="card">
             <div class="card-header">
-              <span class="card-title">Full-Stack Engineer</span>
-              <span class="card-date">Nov 2021 — Present</span>
+              <span class="card-title" data-i18n="employment.newfold.title">Full-Stack Engineer</span>
+              <span class="card-date" data-i18n="employment.newfold.date">Nov 2021 — Present</span>
             </div>
-            <div class="card-subtitle">Newfold Digital (Newtech)</div>
-            <ul>
+            <div class="card-subtitle" data-i18n="employment.newfold.company">Newfold Digital (Newtech)</div>
+            <ul data-i18n-bullets="employment.newfold.bullets">
               <li>
                 E-Commerce Platform Support: Maintained and enhanced
                 multi-marketplace e-commerce integrations (eBay, Amazon) for
@@ -1248,11 +1319,11 @@
           </div>
           <div class="card">
             <div class="card-header">
-              <span class="card-title">Software Developer</span>
-              <span class="card-date">Apr 2022 — Aug 2022</span>
+              <span class="card-title" data-i18n="employment.torre.title">Software Developer</span>
+              <span class="card-date" data-i18n="employment.torre.date">Apr 2022 — Aug 2022</span>
             </div>
-            <div class="card-subtitle">Torre.co</div>
-            <ul>
+            <div class="card-subtitle" data-i18n="employment.torre.company">Torre.co</div>
+            <ul data-i18n-bullets="employment.torre.bullets">
               <li>
                 Developed and enhanced features for the Torre platform using
                 Vuejs and Nuxt, improving overall user experience.
@@ -1269,11 +1340,11 @@
           </div>
           <div class="card">
             <div class="card-header">
-              <span class="card-title">Frontend Developer</span>
-              <span class="card-date">Nov 2020 — Oct 2021</span>
+              <span class="card-title" data-i18n="employment.media.title">Frontend Developer</span>
+              <span class="card-date" data-i18n="employment.media.date">Nov 2020 — Oct 2021</span>
             </div>
-            <div class="card-subtitle">Media Revolutions</div>
-            <ul>
+            <div class="card-subtitle" data-i18n="employment.media.company">Media Revolutions</div>
+            <ul data-i18n-bullets="employment.media.bullets">
               <li>
                 Developed and implemented new features for EWallet application
                 utilizing Next.js within a monorepo architecture.
@@ -1292,9 +1363,9 @@
 
         <div class="two-col">
           <section class="section" id="skills">
-            <h2 class="section-title">Skills</h2>
+            <h2 class="section-title" data-i18n="sections.skills">Skills</h2>
             <div class="skill-group">
-              <div class="skill-group-label">Frontend</div>
+              <div class="skill-group-label" data-i18n="skills.frontend">Frontend</div>
               <div class="skills-grid">
                 <span class="skill-badge">ReactJS</span>
                 <span class="skill-badge">React Native</span>
@@ -1310,7 +1381,7 @@
               </div>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Backend & Tools</div>
+              <div class="skill-group-label" data-i18n="skills.backend">Backend & Tools</div>
               <div class="skills-grid">
                 <span class="skill-badge">Node.js</span>
                 <span class="skill-badge">Bun</span>
@@ -1325,7 +1396,7 @@
               </div>
             </div>
             <div class="skill-group">
-              <div class="skill-group-label">Databases</div>
+              <div class="skill-group-label" data-i18n="skills.databases">Databases</div>
               <div class="skills-grid">
                 <span class="skill-badge">MongoDB</span>
                 <span class="skill-badge">PostgreSQL</span>
@@ -1335,7 +1406,7 @@
           </section>
 
           <section class="section">
-            <h2 class="section-title">Languages</h2>
+            <h2 class="section-title" data-i18n="sections.languages">Languages</h2>
             <div class="lang-grid">
               <div class="lang-item">
                 <span class="lang-name">Spanish</span>
@@ -1351,10 +1422,10 @@
         </div>
 
         <section class="section" id="projects">
-          <h2 class="section-title">Projects</h2>
+          <h2 class="section-title" data-i18n="sections.projects">Projects</h2>
           <div class="project-card">
-            <div class="project-title">Santa Biblia RV60+Audio</div>
-            <div class="project-desc">
+            <div class="project-title" data-i18n="projects.bible.title">Santa Biblia RV60+Audio</div>
+            <div class="project-desc" data-i18n="projects.bible.desc">
               Developed a comprehensive cross-platform mobile Bible study
               application using React Native and Expo, available on Google Play.
               Implemented advanced features including AI-powered Bible guide
@@ -1395,13 +1466,13 @@
                   <polyline points="15 3 21 3 21 9" />
                   <line x1="10" y1="14" x2="21" y2="3" />
                 </svg>
-                View on Google Play
+                <span data-i18n="viewGooglePlay">View on Google Play</span>
               </a>
             </div>
           </div>
           <div class="project-card">
-            <div class="project-title">Lunaria: Period Tracker</div>
-            <div class="project-desc">
+            <div class="project-title" data-i18n="projects.lunaria.title">Lunaria: Period Tracker</div>
+            <div class="project-desc" data-i18n="projects.lunaria.desc">
               A privacy-first period tracking app built with local-first
               architecture. Users can track their menstrual cycle, log symptoms
               and mood, view cycle insights and estimates (fertile window,
@@ -1436,13 +1507,13 @@
                   <polyline points="15 3 21 3 21 9" />
                   <line x1="10" y1="14" x2="21" y2="3" />
                 </svg>
-                View on Google Play
+                <span data-i18n="viewGooglePlay">View on Google Play</span>
               </a>
             </div>
           </div>
           <div class="project-card">
-            <div class="project-title">Diccionario Español - Offline</div>
-            <div class="project-desc">
+            <div class="project-title" data-i18n="projects.dictionary.title">Diccionario Español - Offline</div>
+            <div class="project-desc" data-i18n="projects.dictionary.desc">
               A comprehensive offline Spanish dictionary app with intuitive
               search, favorites, and search history. Features dark/light mode
               and customizable themes for a personalized experience. Designed
@@ -1473,13 +1544,13 @@
                   <polyline points="15 3 21 3 21 9" />
                   <line x1="10" y1="14" x2="21" y2="3" />
                 </svg>
-                View on Google Play
+                <span data-i18n="viewGooglePlay">View on Google Play</span>
               </a>
             </div>
           </div>
           <div class="project-card">
-            <div class="project-title">Real-Time Multiplayer Connect Four</div>
-            <div class="project-desc">
+            <div class="project-title" data-i18n="projects.connect4.title">Real-Time Multiplayer Connect Four</div>
+            <div class="project-desc" data-i18n="projects.connect4.desc">
               Developed a Connect Four-style web game with real-time multiplayer
               using Socket.IO and integrated voice chat via WebRTC/PeerJS.
               Features room-based matchmaking, turn synchronization, and a
@@ -1509,7 +1580,7 @@
                     d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
                   />
                 </svg>
-                View Code
+                <span data-i18n="viewCode">View Code</span>
               </a>
             </div>
           </div>
@@ -1517,27 +1588,25 @@
 
         <div class="two-col">
           <section class="section" id="education">
-            <h2 class="section-title">Education</h2>
+            <h2 class="section-title" data-i18n="sections.education">Education</h2>
             <div class="card">
               <div class="card-header">
-                <span class="card-title"
-                  >Software Development Technologist</span
-                >
-                <span class="card-date">Oct 2019 — Oct 2022</span>
+                <span class="card-title" data-i18n="education.itla.title">Software Development Technologist</span>
+                <span class="card-date" data-i18n="education.itla.date">Oct 2019 — Oct 2022</span>
               </div>
-              <div class="card-subtitle">ITLA Santo Domingo</div>
+              <div class="card-subtitle" data-i18n="education.itla.school">ITLA Santo Domingo</div>
             </div>
             <div class="card">
               <div class="card-header">
-                <span class="card-title">English Immersion Program</span>
-                <span class="card-date">Jan 2016 — Dec 2016</span>
+                <span class="card-title" data-i18n="education.uasd.title">English Immersion Program</span>
+                <span class="card-date" data-i18n="education.uasd.date">Jan 2016 — Dec 2016</span>
               </div>
-              <div class="card-subtitle">UASD Santo Domingo</div>
+              <div class="card-subtitle" data-i18n="education.uasd.school">UASD Santo Domingo</div>
             </div>
           </section>
 
           <section class="section" id="references">
-            <h2 class="section-title">References</h2>
+            <h2 class="section-title" data-i18n="sections.references">References</h2>
             <div class="info-row">
               <span class="info-name">Ing. Raul Luna</span>
               <span class="info-meta">+1 (829) 450-5444</span>
@@ -1553,9 +1622,9 @@
       <footer>
         <div class="footer-content">
           <p class="footer-line">
-            <span>Luis Martinez</span>
+            <span data-i18n="footer.name">Luis Martinez</span>
             <span class="footer-sep">·</span>
-            <span>Full Stack Developer</span>
+            <span data-i18n="footer.role">Full Stack Developer</span>
           </p>
           <p class="footer-line">
             <a href="mailto:louislam09@hotmail.com">louislam09@hotmail.com</a>
@@ -1606,7 +1675,127 @@
     </div>
 
     <script>
+      const translations = {
+        en: {
+          nav: { profile: "Profile", experience: "Experience", skills: "Skills", projects: "Projects", education: "Education", references: "References" },
+          downloadPdf: "Download PDF",
+          title: "Full Stack Developer",
+          expStat: "5+ years experience",
+          location: "Santo Domingo, Dominican Republic",
+          sections: { profile: "Profile", employment: "Employment History", skills: "Skills", languages: "Languages", projects: "Projects", education: "Education", references: "References" },
+          profile: { text: "Dynamic Full-Stack Developer with 5 years of experience delivering innovative solutions across web and mobile applications. Expertise in enhancing user experiences through robust feature implementation and bug resolution, utilizing technologies such as Node.js, C#, .NET, Python, React Native (Expo), React, and VueJs. Committed to transforming complex challenges into seamless, scalable interfaces that foster collaboration among remote teams. Passionate about leveraging AI and Web3 technologies to create impactful digital experiences that resonate with users." },
+          employment: {
+            newfold: { title: "Full-Stack Engineer", date: "Nov 2021 — Present", company: "Newfold Digital (Newtech)", bullets: [
+              "E-Commerce Platform Support: Maintained and enhanced multi-marketplace e-commerce integrations (eBay, Amazon) for Ecomdash, handling complex order processing, inventory management, and third-party API integrations for businesses of all sizes.",
+              "Micro-Frontend Architecture: Built on top of scalable micro frontends for 50+ brands using Material UI and Tailwind CSS, ensuring brand consistency while reducing load times.",
+              "AI-Powered Website Builder Platform: Developed a conversational AI business builder with multi-agent orchestration (Domain, Website, Brand agents) enabling users to create complete web presences through natural language. Built micro-frontend architecture with React 19 ESM modules and real-time WebSocket preview updates.",
+              "AI-Driven Onboarding System: Developed an intuitive AI-powered onboarding process that reduced user drop-offs by 15% and cut onboarding time by 60%.",
+              "AI-Powered Virtual Assistant Platform: Built NewfoldGPT, a reusable micro-frontend AI framework with 4 specialized models (coding, reasoning, everyday tasks) deployed across Finance, Development, and Support teams.",
+              "AI Voice Agent Backend System: Built a production-ready FastAPI backend with PostgreSQL 16 to manage AI-powered voice conversations, processing real-time metrics, tool calls, and LLM usage tracking. Implemented secure webhook authentication with HMAC-SHA256 validation and automated data retention policies."
+            ]},
+            torre: { title: "Software Developer", date: "Apr 2022 — Aug 2022", company: "Torre.co", bullets: [
+              "Developed and enhanced features for the Torre platform using Vuejs and Nuxt, improving overall user experience.",
+              "Resolved bugs and performance issues, ensuring platform stability and reliability for users.",
+              "Collaborated with cross-functional teams to gather requirements and deliver effective technical solutions."
+            ]},
+            media: { title: "Frontend Developer", date: "Nov 2020 — Oct 2021", company: "Media Revolutions", bullets: [
+              "Developed and implemented new features for EWallet application utilizing Next.js within a monorepo architecture.",
+              "Resolved complex bugs to enhance application performance and user experience.",
+              "Collaborated with cross-functional teams to ensure seamless integration of features and maintain code quality."
+            ]}
+          },
+          skills: { frontend: "Frontend", backend: "Backend & Tools", databases: "Databases" },
+          projects: {
+            bible: { title: "Santa Biblia RV60+Audio", desc: "Developed a comprehensive cross-platform mobile Bible study application using React Native and Expo, available on Google Play. Implemented advanced features including AI-powered Bible guide with Google Generative AI, offline-first architecture using SQLite, concordance, Strong's word references, commentary, dictionary, timeline visualizations, scripture memorization games, quizzes, custom note-taking with Lexical rich text editor, hymn library, audio playback, text-to-speech, and quote image generator." },
+            lunaria: { title: "Lunaria: Period Tracker", desc: "A privacy-first period tracking app built with local-first architecture. Users can track their menstrual cycle, log symptoms and mood, view cycle insights and estimates (fertile window, ovulation), and use a visual calendar—all without creating an account. Features guest mode, optional cloud sync, custom notifications, and data export. Designed for users who value data privacy and offline access." },
+            dictionary: { title: "Diccionario Español - Offline", desc: "A comprehensive offline Spanish dictionary app with intuitive search, favorites, and search history. Features dark/light mode and customizable themes for a personalized experience. Designed for hassle-free word lookup tailored to daily use." },
+            connect4: { title: "Real-Time Multiplayer Connect Four", desc: "Developed a Connect Four-style web game with real-time multiplayer using Socket.IO and integrated voice chat via WebRTC/PeerJS. Features room-based matchmaking, turn synchronization, and a PWA-ready architecture for cross-device play." }
+          },
+          viewGooglePlay: "View on Google Play",
+          viewCode: "View Code",
+          education: { itla: { title: "Software Development Technologist", date: "Oct 2019 — Oct 2022", school: "ITLA Santo Domingo" }, uasd: { title: "English Immersion Program", date: "Jan 2016 — Dec 2016", school: "UASD Santo Domingo" } },
+          footer: { name: "Luis Martinez", role: "Full Stack Developer" }
+        },
+        es: {
+          nav: { profile: "Perfil", experience: "Experiencia", skills: "Habilidades", projects: "Proyectos", education: "Educación", references: "Referencias" },
+          downloadPdf: "Descargar PDF",
+          title: "Desarrollador Full Stack",
+          expStat: "5+ años de experiencia",
+          location: "Santo Domingo, República Dominicana",
+          sections: { profile: "Perfil", employment: "Historial Laboral", skills: "Habilidades", languages: "Idiomas", projects: "Proyectos", education: "Educación", references: "Referencias" },
+          profile: { text: "Desarrollador Full-Stack dinámico con 5 años de experiencia entregando soluciones innovadoras en aplicaciones web y móviles. Experto en mejorar la experiencia del usuario mediante implementación robusta de funciones y resolución de errores, utilizando tecnologías como Node.js, C#, .NET, Python, React Native (Expo), React y VueJs. Comprometido con transformar desafíos complejos en interfaces escalables que fomentan la colaboración entre equipos remotos. Apasionado por aprovechar las tecnologías de IA y Web3 para crear experiencias digitales impactantes." },
+          employment: {
+            newfold: { title: "Ingeniero Full-Stack", date: "Nov 2021 — Presente", company: "Newfold Digital (Newtech)", bullets: [
+              "Soporte de Plataforma E-Commerce: Mantuve y mejoré integraciones de comercio electrónico multi-mercado (eBay, Amazon) para Ecomdash, manejando procesamiento de pedidos, gestión de inventario e integraciones de APIs de terceros para empresas de todos los tamaños.",
+              "Arquitectura Micro-Frontend: Construí sobre micro frontends escalables para más de 50 marcas usando Material UI y Tailwind CSS, asegurando consistencia de marca y reduciendo tiempos de carga.",
+              "Plataforma de Constructor Web con IA: Desarrollé un constructor de negocios con IA conversacional y orquestación multi-agente (agentes de Dominio, Sitio Web, Marca) permitiendo a usuarios crear presencias web completas mediante lenguaje natural. Arquitectura micro-frontend con módulos ESM de React 19 y actualizaciones de vista previa en tiempo real por WebSocket.",
+              "Sistema de Onboarding con IA: Desarrollé un proceso de onboarding intuitivo con IA que redujo abandonos en un 15% y el tiempo de onboarding en un 60%.",
+              "Plataforma de Asistente Virtual con IA: Construí NewfoldGPT, un framework de IA micro-frontend reutilizable con 4 modelos especializados (código, razonamiento, tareas cotidianas) desplegado en equipos de Finanzas, Desarrollo y Soporte.",
+              "Sistema Backend de Agente de Voz con IA: Construí un backend FastAPI listo para producción con PostgreSQL 16 para gestionar conversaciones de voz con IA, procesando métricas en tiempo real, llamadas a herramientas y seguimiento de uso de LLM. Implementé autenticación segura de webhooks con validación HMAC-SHA256 y políticas automatizadas de retención de datos."
+            ]},
+            torre: { title: "Desarrollador de Software", date: "Abr 2022 — Ago 2022", company: "Torre.co", bullets: [
+              "Desarrollé y mejoré funciones para la plataforma Torre usando Vuejs y Nuxt, mejorando la experiencia del usuario.",
+              "Resolví errores y problemas de rendimiento, asegurando estabilidad y confiabilidad de la plataforma.",
+              "Colaboré con equipos multifuncionales para recopilar requisitos y entregar soluciones técnicas efectivas."
+            ]},
+            media: { title: "Desarrollador Frontend", date: "Nov 2020 — Oct 2021", company: "Media Revolutions", bullets: [
+              "Desarrollé e implementé nuevas funciones para la aplicación EWallet utilizando Next.js en una arquitectura monorepo.",
+              "Resolví errores complejos para mejorar el rendimiento y la experiencia del usuario.",
+              "Colaboré con equipos multifuncionales para asegurar integración fluida de funciones y mantener la calidad del código."
+            ]}
+          },
+          skills: { frontend: "Frontend", backend: "Backend y Herramientas", databases: "Bases de Datos" },
+          projects: {
+            bible: { title: "Santa Biblia RV60+Audio", desc: "Desarrollé una aplicación móvil multiplataforma de estudio bíblico usando React Native y Expo, disponible en Google Play. Implementé funciones avanzadas incluyendo guía bíblica con IA usando Google Generative AI, arquitectura offline-first con SQLite, concordancia, referencias Strong, comentarios, diccionario, visualizaciones de línea de tiempo, juegos de memorización, cuestionarios, notas personalizadas con editor Lexical, biblioteca de himnos, reproducción de audio, texto a voz y generador de imágenes de citas." },
+            lunaria: { title: "Lunaria: Rastreador de Período", desc: "Una app de seguimiento de período con enfoque en privacidad, construida con arquitectura local-first. Los usuarios pueden rastrear su ciclo menstrual, registrar síntomas y estado de ánimo, ver insights y estimaciones (ventana fértil, ovulación) y usar un calendario visual—todo sin crear cuenta. Incluye modo invitado, sincronización en la nube opcional, notificaciones personalizadas y exportación de datos. Diseñada para usuarios que valoran la privacidad y el acceso offline." },
+            dictionary: { title: "Diccionario Español - Sin conexión", desc: "Una app de diccionario español offline con búsqueda intuitiva, favoritos e historial. Incluye modo oscuro/claro y temas personalizables. Diseñada para consultas de palabras sin complicaciones." },
+            connect4: { title: "Conecta 4 Multijugador en Tiempo Real", desc: "Desarrollé un juego web estilo Conecta 4 con multijugador en tiempo real usando Socket.IO y chat de voz integrado vía WebRTC/PeerJS. Incluye emparejamiento por salas, sincronización de turnos y arquitectura PWA para juego multiplataforma." }
+          },
+          viewGooglePlay: "Ver en Google Play",
+          viewCode: "Ver Código",
+          education: { itla: { title: "Tecnólogo en Desarrollo de Software", date: "Oct 2019 — Oct 2022", school: "ITLA Santo Domingo" }, uasd: { title: "Programa de Inmersión en Inglés", date: "Ene 2016 — Dic 2016", school: "UASD Santo Domingo" } },
+          footer: { name: "Luis Martinez", role: "Desarrollador Full Stack" }
+        }
+      };
+
+      function getNested(obj, path) {
+        return path.split(".").reduce((o, k) => (o || {})[k], obj);
+      }
+
+      function applyLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.setAttribute("data-lang", lang);
+        document.title = lang === "es" ? "Luis Martinez - Desarrollador Full Stack" : "Luis Martinez - Full Stack Developer";
+        const t = translations[lang] || translations.en;
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const val = getNested(t, el.getAttribute("data-i18n"));
+          if (val != null && typeof val === "string") el.textContent = val;
+        });
+
+        document.querySelectorAll("[data-i18n-bullets]").forEach((ul) => {
+          const bullets = getNested(t, ul.getAttribute("data-i18n-bullets"));
+          if (Array.isArray(bullets)) {
+            ul.innerHTML = bullets.map((b) => `<li>${b}</li>`).join("");
+          }
+        });
+
+        document.querySelectorAll(".lang-toggle [data-lang-btn]").forEach((btn) => {
+          btn.classList.toggle("active", btn.getAttribute("data-lang-btn") === lang);
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
+        const savedLang = localStorage.getItem("lang") || "en";
+        applyLanguage(savedLang);
+
+        document.getElementById("lang-toggle")?.addEventListener("click", function () {
+          const current = document.documentElement.getAttribute("data-lang") || "en";
+          const next = current === "en" ? "es" : "en";
+          localStorage.setItem("lang", next);
+          applyLanguage(next);
+        });
+
         const sections = document.querySelectorAll(".section");
         const footer = document.querySelector("footer");
 
