@@ -1,0 +1,1678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luis Martinez - Full Stack Developer</title>
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background: #000;
+        --foreground: #fff;
+        --accent: #3b82f6;
+        --accent-hover: #2563eb;
+        --accent-light: rgba(59, 130, 246, 0.15);
+        --accent-glow: rgba(59, 130, 246, 0.2);
+        --gray-100: #f5f5f5;
+        --gray-200: #e5e5e5;
+        --gray-300: #d4d4d4;
+        --gray-400: #a3a3a3;
+        --gray-500: #737373;
+        --gray-600: #525252;
+        --gray-700: #404040;
+        --gray-800: #262626;
+        --gray-900: #171717;
+        --radius: 8px;
+        --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+        --font-display: "Outfit", var(--font-sans);
+        --font-mono:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+      }
+
+      [data-theme="light"] {
+        --background: #f8fafc;
+        --foreground: #0f172a;
+        --gray-100: #f1f5f9;
+        --gray-200: #e2e8f0;
+        --gray-300: #475569;
+        --gray-400: #64748b;
+        --gray-500: #94a3b8;
+        --gray-600: #64748b;
+        --gray-700: #475569;
+        --gray-800: #e2e8f0;
+        --gray-900: #f1f5f9;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      html,
+      body {
+        background-color: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        line-height: 1.6;
+        min-height: 100%;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          var(--gray-800) 1px,
+          transparent 0
+        );
+        background-size: 32px 32px;
+        opacity: 0.4;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      [data-theme="light"] body::before {
+        opacity: 0.5;
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Top bar */
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8125rem;
+        color: var(--gray-400);
+        text-decoration: none;
+        padding: 0.35rem 0.65rem;
+        border-radius: 6px;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+        background: var(--accent-light);
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-download,
+      .btn-print {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        text-decoration: none;
+        font-family: inherit;
+      }
+
+      .btn-download {
+        background: var(--accent);
+        color: white;
+      }
+
+      .btn-download:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+      }
+
+      .btn-print {
+        background: var(--gray-800);
+        color: var(--foreground);
+        border: 1px solid var(--gray-700);
+      }
+
+      .btn-print:hover {
+        background: var(--gray-700);
+        border-color: var(--gray-600);
+      }
+
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius);
+        border: 1px solid var(--gray-700);
+        background: var(--gray-900);
+        color: var(--foreground);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+
+      .theme-toggle:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .theme-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* Header / Hero */
+      header {
+        padding: 2rem 0 2.5rem;
+        text-align: center;
+      }
+
+      .hero-wrapper {
+        position: relative;
+      }
+
+      .name {
+        font-family: var(--font-display);
+        font-size: 2.75rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.25rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .name::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 8px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        opacity: 0.4;
+        border-radius: 4px;
+        filter: blur(4px);
+      }
+
+      .title-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .title {
+        font-size: 1.25rem;
+        color: var(--accent);
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+      }
+
+      .exp-stat {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 1rem;
+        background: var(--accent-light);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 100px;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.35rem 0.75rem;
+        background: var(--accent-light);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 100px;
+        font-size: 0.8125rem;
+        color: var(--foreground);
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+
+      .contact-badge {
+        transition: all 0.2s;
+      }
+
+      .contact-badge:hover {
+        background: rgba(59, 130, 246, 0.25);
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+      }
+
+      .contact-badge svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        opacity: 0.9;
+      }
+
+      /* Respect reduced motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        .name,
+        .title,
+        .contact-row {
+          animation: none;
+          opacity: 1;
+        }
+        .section,
+        .section .section-title,
+        .card,
+        .profile-box,
+        .project-card,
+        .info-row,
+        .lang-item,
+        .skill-badge,
+        .project-feature,
+        footer {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        .contact-badge:hover,
+        .skill-badge:hover {
+          transform: none !important;
+        }
+      }
+
+      /* Animation keyframes */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Initial load animations */
+      .name {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+      .title {
+        animation: fadeInUp 0.6s ease-out 0.1s forwards;
+        opacity: 0;
+      }
+
+      .contact-row {
+        animation: fadeInUp 0.6s ease-out 0.2s forwards;
+        opacity: 0;
+      }
+
+      .section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s ease-out,
+          transform 0.5s ease-out;
+      }
+
+      .section.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section .section-title {
+        opacity: 0;
+        transform: translateX(-12px);
+        transition:
+          opacity 0.4s ease-out 0.1s,
+          transform 0.4s ease-out 0.1s;
+      }
+
+      .section.animate-in .section-title {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .card,
+      .profile-box,
+      .project-card,
+      .info-row,
+      .lang-item {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.4s ease-out,
+          transform 0.4s ease-out,
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+
+      .section.animate-in .card,
+      .section.animate-in .profile-box,
+      .section.animate-in .project-card,
+      .section.animate-in .info-row,
+      .section.animate-in .lang-item {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Stagger children */
+      .section.animate-in .card:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .section.animate-in .card:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .section.animate-in .card:nth-child(3) {
+        transition-delay: 0.15s;
+      }
+      .section.animate-in .card:nth-child(4) {
+        transition-delay: 0.2s;
+      }
+      .section.animate-in .card:nth-child(5) {
+        transition-delay: 0.25s;
+      }
+      .section.animate-in .profile-box {
+        transition-delay: 0.1s;
+      }
+      .section.animate-in .project-card:nth-child(2) {
+        transition-delay: 0.08s;
+      }
+      .section.animate-in .info-row:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .section.animate-in .info-row:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .section.animate-in .lang-item:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .section.animate-in .lang-item:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .section.animate-in .lang-item:nth-child(3) {
+        transition-delay: 0.15s;
+      }
+
+      .skill-badge {
+        opacity: 0;
+        transform: scale(0.9);
+        transition:
+          opacity 0.3s ease-out,
+          transform 0.3s ease-out,
+          border-color 0.2s,
+          color 0.2s;
+      }
+
+      .section.animate-in .skill-badge {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .section.animate-in .skill-group:nth-child(1) .skill-badge {
+        transition-delay: 0.05s;
+      }
+      .section.animate-in .skill-group:nth-child(2) .skill-badge {
+        transition-delay: 0.1s;
+      }
+      .section.animate-in .skill-group:nth-child(3) .skill-badge {
+        transition-delay: 0.15s;
+      }
+      .section.animate-in .skill-group:nth-child(4) .skill-badge {
+        transition-delay: 0.2s;
+      }
+      .section.animate-in .skill-group:nth-child(5) .skill-badge {
+        transition-delay: 0.25s;
+      }
+
+      .project-feature {
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.3s ease-out,
+          transform 0.3s ease-out;
+      }
+
+      .section.animate-in .project-feature {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section.animate-in .project-feature:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .section.animate-in .project-feature:nth-child(2) {
+        transition-delay: 0.08s;
+      }
+      .section.animate-in .project-feature:nth-child(3) {
+        transition-delay: 0.11s;
+      }
+      .section.animate-in .project-feature:nth-child(4) {
+        transition-delay: 0.14s;
+      }
+      .section.animate-in .project-feature:nth-child(5) {
+        transition-delay: 0.17s;
+      }
+      .section.animate-in .project-feature:nth-child(6) {
+        transition-delay: 0.2s;
+      }
+      .section.animate-in .project-feature:nth-child(7) {
+        transition-delay: 0.23s;
+      }
+      .section.animate-in .project-feature:nth-child(8) {
+        transition-delay: 0.26s;
+      }
+
+      /* Card hover effects */
+      .card:hover,
+      .project-card:hover {
+        border-color: var(--gray-700);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .skill-badge:hover {
+        transform: scale(1.05);
+      }
+
+      main {
+        flex: 1;
+        padding: 0 0 2rem;
+      }
+
+      /* Sections */
+      .section {
+        margin-bottom: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .section-title::before {
+        content: "";
+        width: 4px;
+        height: 1.25rem;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      .profile-box {
+        background: var(--gray-900);
+        border: 1px solid var(--gray-800);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        color: var(--gray-300);
+        font-size: 0.9375rem;
+        line-height: 1.7;
+      }
+
+      /* Employment cards */
+      .card {
+        background: var(--gray-900);
+        border: 1px solid var(--gray-800);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .card:last-child {
+        margin-bottom: 0;
+      }
+
+      .card-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .card-title {
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: var(--foreground);
+      }
+
+      .card-date {
+        font-size: 0.8125rem;
+        color: var(--gray-500);
+        white-space: nowrap;
+      }
+
+      .card-subtitle {
+        font-size: 0.875rem;
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+      }
+
+      .card ul {
+        list-style: none;
+        color: var(--gray-400);
+        font-size: 0.875rem;
+        line-height: 1.65;
+      }
+
+      .card li {
+        padding-left: 1.25rem;
+        position: relative;
+        margin-bottom: 0.5rem;
+      }
+
+      .card li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* Skills grouped */
+      .skill-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .skill-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .skill-group-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--gray-500);
+        margin-bottom: 0.5rem;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .skill-badge {
+        display: inline-flex;
+        padding: 0.35rem 0.75rem;
+        background: var(--gray-900);
+        border: 1px solid var(--gray-800);
+        border-radius: 100px;
+        font-size: 0.8125rem;
+        color: var(--gray-300);
+        transition: all 0.2s;
+      }
+
+      .skill-badge:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* Projects */
+      .project-card {
+        background: var(--gray-900);
+        border: 1px solid var(--gray-800);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .project-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--foreground);
+        margin-bottom: 0.5rem;
+      }
+
+      .project-desc {
+        color: var(--gray-400);
+        font-size: 0.875rem;
+        line-height: 1.65;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+
+      .project-feature {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+        background: var(--accent-light);
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        border-radius: 4px;
+        color: var(--accent);
+      }
+
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--accent);
+        text-decoration: none;
+        padding: 0.35rem 0.75rem;
+        background: var(--accent-light);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+
+      .project-link:hover {
+        background: rgba(59, 130, 246, 0.25);
+        border-color: var(--accent);
+      }
+
+      .project-link svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* Scroll to top */
+      .scroll-top {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--gray-900);
+        border: 1px solid var(--gray-700);
+        color: var(--foreground);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 100;
+      }
+
+      .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .scroll-top:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+      }
+
+      .scroll-top svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Education & References */
+      .info-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem 1.25rem;
+        background: var(--gray-900);
+        border: 1px solid var(--gray-800);
+        border-radius: var(--radius);
+        margin-bottom: 0.5rem;
+      }
+
+      .info-name {
+        font-weight: 600;
+        color: var(--foreground);
+      }
+
+      .info-meta {
+        font-size: 0.8125rem;
+        color: var(--gray-500);
+      }
+
+      /* Languages */
+      .lang-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .lang-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--gray-900);
+        border: 1px solid var(--gray-800);
+        border-radius: var(--radius);
+      }
+
+      .lang-name {
+        font-weight: 500;
+        color: var(--foreground);
+      }
+
+      /* Two-column layout for larger screens */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      footer {
+        padding: 2rem 0;
+        border-top: 1px solid var(--gray-800);
+        text-align: center;
+        color: var(--gray-500);
+        font-size: 0.875rem;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .footer-line {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem 0.5rem;
+        margin: 0;
+      }
+
+      .footer-sep {
+        color: var(--gray-600);
+        user-select: none;
+      }
+
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      .footer-meta {
+        font-size: 0.8125rem;
+        color: var(--gray-500);
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem 0.5rem;
+      }
+
+      footer {
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.5s ease-out 0.2s,
+          transform 0.5s ease-out 0.2s;
+      }
+
+      footer.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .name {
+          font-size: 2rem;
+        }
+        .title {
+          font-size: 1.125rem;
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          padding: 0 1rem;
+        }
+        header {
+          padding: 1.5rem 0 1.5rem;
+        }
+        .name {
+          font-size: 1.75rem;
+        }
+        .contact-row {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      @media print {
+        .top-bar,
+        .theme-toggle,
+        .scroll-top {
+          display: none !important;
+        }
+        .section,
+        .section .section-title,
+        .card,
+        .profile-box,
+        .project-card,
+        .info-row,
+        .lang-item,
+        .skill-badge,
+        .project-feature,
+        footer {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+          transition: none !important;
+        }
+        body {
+          background: #fff;
+          color: #111;
+        }
+        .container {
+          max-width: 100%;
+        }
+        .contact-badge,
+        .skill-badge,
+        .project-feature {
+          background: #f0f0f0 !important;
+          border-color: #ddd !important;
+          color: #333 !important;
+        }
+        .section-title {
+          color: var(--accent) !important;
+        }
+        .card-subtitle {
+          color: var(--accent) !important;
+        }
+        .card,
+        .profile-box,
+        .project-card,
+        .info-row {
+          border-color: #ddd !important;
+          background: #fafafa !important;
+        }
+        .card li,
+        .profile-box,
+        .project-desc {
+          color: #444 !important;
+        }
+        a {
+          color: var(--accent) !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="top-bar">
+        <div class="nav-links">
+          <a href="#profile">Profile</a>
+          <a href="#employment">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Education</a>
+          <a href="#references">References</a>
+        </div>
+        <div class="top-actions">
+          <a
+            href="Luis Martinez - Resume - Full Stack Developer 2.pdf"
+            download
+            class="btn-download"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download PDF
+          </a>
+          <button type="button" class="btn-print" onclick="window.print()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6 9 6 2 18 2 18 9" />
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              />
+            </svg>
+            Print
+          </button>
+          <button
+            type="button"
+            class="theme-toggle"
+            aria-label="Toggle theme"
+            id="theme-toggle"
+          >
+            <svg
+              class="icon-sun"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <svg
+              class="icon-moon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              style="display: none"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <header>
+        <div class="hero-wrapper">
+          <h1 class="name">Luis Martinez</h1>
+          <div class="title-row">
+            <p class="title">Full Stack Developer</p>
+            <span class="exp-stat">5+ years experience</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <a href="mailto:louislam09@hotmail.com" class="contact-badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            louislam09@hotmail.com
+          </a>
+          <a href="tel:+18292867606" class="contact-badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+            +1 (829) 286-7606
+          </a>
+          <span class="contact-badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            Santo Domingo, Dominican Republic
+          </span>
+          <a
+            href="https://www.linkedin.com/in/luis-alejandro-martinez-magallanes-643aba207"
+            target="_blank"
+            rel="noopener"
+            class="contact-badge"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+              />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+            LinkedIn
+          </a>
+          <a
+            href="https://github.com/Louislam09"
+            target="_blank"
+            rel="noopener"
+            class="contact-badge"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              />
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </header>
+
+      <main>
+        <section class="section" id="profile">
+          <h2 class="section-title">Profile</h2>
+          <div class="profile-box">
+            Dynamic Full-Stack Developer with 5 years of experience delivering
+            innovative solutions across web and mobile applications. Expertise
+            in enhancing user experiences through robust feature implementation
+            and bug resolution, utilizing technologies such as Node.js, C#,
+            .NET, Python, React Native (Expo), React, and VueJs. Committed to
+            transforming complex challenges into seamless, scalable interfaces
+            that foster collaboration among remote teams. Passionate about
+            leveraging AI and Web3 technologies to create impactful digital
+            experiences that resonate with users.
+          </div>
+        </section>
+
+        <section class="section" id="employment">
+          <h2 class="section-title">Employment History</h2>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Full-Stack Engineer</span>
+              <span class="card-date">Nov 2021 — Present</span>
+            </div>
+            <div class="card-subtitle">Newfold Digital (Newtech)</div>
+            <ul>
+              <li>
+                E-Commerce Platform Support: Maintained and enhanced
+                multi-marketplace e-commerce integrations (eBay, Amazon) for
+                Ecomdash, handling complex order processing, inventory
+                management, and third-party API integrations for businesses of
+                all sizes.
+              </li>
+              <li>
+                Micro-Frontend Architecture: Built on top of scalable micro
+                frontends for 50+ brands using Material UI and Tailwind CSS,
+                ensuring brand consistency while reducing load times.
+              </li>
+              <li>
+                AI-Powered Website Builder Platform: Developed a conversational
+                AI business builder with multi-agent orchestration (Domain,
+                Website, Brand agents) enabling users to create complete web
+                presences through natural language. Built micro-frontend
+                architecture with React 19 ESM modules and real-time WebSocket
+                preview updates.
+              </li>
+              <li>
+                AI-Driven Onboarding System: Developed an intuitive AI-powered
+                onboarding process that reduced user drop-offs by 15% and cut
+                onboarding time by 60%.
+              </li>
+              <li>
+                AI-Powered Virtual Assistant Platform: Built NewfoldGPT, a
+                reusable micro-frontend AI framework with 4 specialized models
+                (coding, reasoning, everyday tasks) deployed across Finance,
+                Development, and Support teams.
+              </li>
+              <li>
+                AI Voice Agent Backend System: Built a production-ready FastAPI
+                backend with PostgreSQL 16 to manage AI-powered voice
+                conversations, processing real-time metrics, tool calls, and LLM
+                usage tracking. Implemented secure webhook authentication with
+                HMAC-SHA256 validation and automated data retention policies.
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Software Developer</span>
+              <span class="card-date">Apr 2022 — Aug 2022</span>
+            </div>
+            <div class="card-subtitle">Torre.co</div>
+            <ul>
+              <li>
+                Developed and enhanced features for the Torre platform using
+                Vuejs and Nuxt, improving overall user experience.
+              </li>
+              <li>
+                Resolved bugs and performance issues, ensuring platform
+                stability and reliability for users.
+              </li>
+              <li>
+                Collaborated with cross-functional teams to gather requirements
+                and deliver effective technical solutions.
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Frontend Developer</span>
+              <span class="card-date">Nov 2020 — Oct 2021</span>
+            </div>
+            <div class="card-subtitle">Media Revolutions</div>
+            <ul>
+              <li>
+                Developed and implemented new features for EWallet application
+                utilizing Next.js within a monorepo architecture.
+              </li>
+              <li>
+                Resolved complex bugs to enhance application performance and
+                user experience.
+              </li>
+              <li>
+                Collaborated with cross-functional teams to ensure seamless
+                integration of features and maintain code quality.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="two-col">
+          <section class="section" id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skill-group">
+              <div class="skill-group-label">Frontend</div>
+              <div class="skills-grid">
+                <span class="skill-badge">ReactJS</span>
+                <span class="skill-badge">React Native</span>
+                <span class="skill-badge">Expo</span>
+                <span class="skill-badge">VueJs</span>
+                <span class="skill-badge">TypeScript</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">NextJs</span>
+                <span class="skill-badge">HTML5</span>
+                <span class="skill-badge">CSS</span>
+                <span class="skill-badge">CSS3</span>
+                <span class="skill-badge">Tailwind CSS</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Backend & Tools</div>
+              <div class="skills-grid">
+                <span class="skill-badge">Node.js</span>
+                <span class="skill-badge">Bun</span>
+                <span class="skill-badge">Express.js</span>
+                <span class="skill-badge">C#</span>
+                <span class="skill-badge">.NET</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">FastAPI</span>
+                <span class="skill-badge">GraphQL</span>
+                <span class="skill-badge">Socket.io</span>
+                <span class="skill-badge">Git</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Databases</div>
+              <div class="skills-grid">
+                <span class="skill-badge">MongoDB</span>
+                <span class="skill-badge">PostgreSQL</span>
+                <span class="skill-badge">SQLite</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Languages</h2>
+            <div class="lang-grid">
+              <div class="lang-item">
+                <span class="lang-name">Spanish</span>
+              </div>
+              <div class="lang-item">
+                <span class="lang-name">English</span>
+              </div>
+              <div class="lang-item">
+                <span class="lang-name">French</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="section" id="projects">
+          <h2 class="section-title">Projects</h2>
+          <div class="project-card">
+            <div class="project-title">Santa Biblia RV60+Audio</div>
+            <div class="project-desc">
+              Developed a comprehensive cross-platform mobile Bible study
+              application using React Native and Expo, available on Google Play.
+              Implemented advanced features including AI-powered Bible guide
+              with Google Generative AI, offline-first architecture using
+              SQLite, concordance, Strong's word references, commentary,
+              dictionary, timeline visualizations, scripture memorization games,
+              quizzes, custom note-taking with Lexical rich text editor, hymn
+              library, audio playback, text-to-speech, and quote image
+              generator.
+            </div>
+            <div class="project-features">
+              <span class="project-feature">React Native</span>
+              <span class="project-feature">Expo</span>
+              <span class="project-feature">TypeScript</span>
+              <span class="project-feature">SQLite</span>
+              <span class="project-feature">Google Generative AI</span>
+              <span class="project-feature">Lexical</span>
+              <span class="project-feature">TailwindCSS</span>
+              <span class="project-feature">PocketBase</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.louislam09.bible"
+                target="_blank"
+                rel="noopener"
+                class="project-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                  />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                View on Google Play
+              </a>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Lunaria: Period Tracker</div>
+            <div class="project-desc">
+              A privacy-first period tracking app built with local-first
+              architecture. Users can track their menstrual cycle, log symptoms
+              and mood, view cycle insights and estimates (fertile window,
+              ovulation), and use a visual calendar—all without creating an
+              account. Features guest mode, optional cloud sync, custom
+              notifications, and data export. Designed for users who value data
+              privacy and offline access.
+            </div>
+            <div class="project-features">
+              <span class="project-feature">React Native</span>
+              <span class="project-feature">Local-first</span>
+              <span class="project-feature">Offline</span>
+              <span class="project-feature">Health & Fitness</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.louislam09.lunaria"
+                target="_blank"
+                rel="noopener"
+                class="project-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                  />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                View on Google Play
+              </a>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Diccionario Español - Offline</div>
+            <div class="project-desc">
+              A comprehensive offline Spanish dictionary app with intuitive
+              search, favorites, and search history. Features dark/light mode
+              and customizable themes for a personalized experience. Designed
+              for hassle-free word lookup tailored to daily use.
+            </div>
+            <div class="project-features">
+              <span class="project-feature">React Native</span>
+              <span class="project-feature">Offline</span>
+              <span class="project-feature">Books & Reference</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.louislam09.dictionary"
+                target="_blank"
+                rel="noopener"
+                class="project-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                  />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                View on Google Play
+              </a>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Real-Time Multiplayer Connect Four</div>
+            <div class="project-desc">
+              Developed a Connect Four-style web game with real-time multiplayer
+              using Socket.IO and integrated voice chat via WebRTC/PeerJS.
+              Features room-based matchmaking, turn synchronization, and a
+              PWA-ready architecture for cross-device play.
+            </div>
+            <div class="project-features">
+              <span class="project-feature">Socket.IO</span>
+              <span class="project-feature">WebRTC</span>
+              <span class="project-feature">PeerJS</span>
+              <span class="project-feature">PWA</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/Louislam09"
+                target="_blank"
+                rel="noopener"
+                class="project-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                  />
+                </svg>
+                View Code
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <div class="two-col">
+          <section class="section" id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title"
+                  >Software Development Technologist</span
+                >
+                <span class="card-date">Oct 2019 — Oct 2022</span>
+              </div>
+              <div class="card-subtitle">ITLA Santo Domingo</div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">English Immersion Program</span>
+                <span class="card-date">Jan 2016 — Dec 2016</span>
+              </div>
+              <div class="card-subtitle">UASD Santo Domingo</div>
+            </div>
+          </section>
+
+          <section class="section" id="references">
+            <h2 class="section-title">References</h2>
+            <div class="info-row">
+              <span class="info-name">Ing. Raul Luna</span>
+              <span class="info-meta">+1 (829) 450-5444</span>
+            </div>
+            <div class="info-row">
+              <span class="info-name">Ing. Mikhael Santos Fernandez</span>
+              <span class="info-meta">+1 (849) 351-8051</span>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <div class="footer-content">
+          <p class="footer-line">
+            <span>Luis Martinez</span>
+            <span class="footer-sep">·</span>
+            <span>Full Stack Developer</span>
+          </p>
+          <p class="footer-line">
+            <a href="mailto:louislam09@hotmail.com">louislam09@hotmail.com</a>
+            <span class="footer-sep">·</span>
+            <a href="tel:+18292867606">+1 (829) 286-7606</a>
+          </p>
+          <p class="footer-meta">
+            <a
+              href="https://www.linkedin.com/in/luis-alejandro-martinez-magallanes-643aba207"
+              target="_blank"
+              rel="noopener"
+              >LinkedIn</a
+            >
+            <span class="footer-sep">·</span>
+            <a
+              href="https://github.com/Louislam09"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <span class="footer-sep">·</span>
+            <a
+              href="https://github.com/Louislam09"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </p>
+        </div>
+      </footer>
+
+      <button
+        type="button"
+        class="scroll-top"
+        id="scroll-top"
+        aria-label="Scroll to top"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="18 15 12 9 6 15" />
+        </svg>
+      </button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".section");
+        const footer = document.querySelector("footer");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate-in");
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        if (footer) observer.observe(footer);
+
+        // Theme toggle
+        const themeToggle = document.getElementById("theme-toggle");
+        const iconSun = themeToggle?.querySelector(".icon-sun");
+        const iconMoon = themeToggle?.querySelector(".icon-moon");
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        if (savedTheme === "light") {
+          iconSun.style.display = "none";
+          iconMoon.style.display = "block";
+        }
+        themeToggle?.addEventListener("click", function () {
+          const isLight =
+            document.documentElement.getAttribute("data-theme") === "light";
+          const next = isLight ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          iconSun.style.display = isLight ? "block" : "none";
+          iconMoon.style.display = isLight ? "none" : "block";
+        });
+
+        // Scroll to top
+        const scrollTopBtn = document.getElementById("scroll-top");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 400) {
+            scrollTopBtn?.classList.add("visible");
+          } else {
+            scrollTopBtn?.classList.remove("visible");
+          }
+        });
+        scrollTopBtn?.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+    </script>
+  </body>
+</html>
