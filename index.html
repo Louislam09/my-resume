@@ -1169,7 +1169,7 @@
           <h1 class="name">Luis Martinez</h1>
           <div class="title-row">
             <p class="title" data-i18n="title">Full Stack Developer</p>
-            <span class="exp-stat" data-i18n="expStat">5+ years experience</span>
+            <span class="exp-stat" data-i18n-exp="expStatSuffix">5+ years experience</span>
           </div>
         </div>
         <div class="contact-row">
@@ -1680,7 +1680,7 @@
           nav: { profile: "Profile", experience: "Experience", skills: "Skills", projects: "Projects", education: "Education", references: "References" },
           downloadPdf: "Download PDF",
           title: "Full Stack Developer",
-          expStat: "5+ years experience",
+          expStatSuffix: "years experience",
           location: "Santo Domingo, Dominican Republic",
           sections: { profile: "Profile", employment: "Employment History", skills: "Skills", languages: "Languages", projects: "Projects", education: "Education", references: "References" },
           profile: { text: "Dynamic Full-Stack Developer with 5 years of experience delivering innovative solutions across web and mobile applications. Expertise in enhancing user experiences through robust feature implementation and bug resolution, utilizing technologies such as Node.js, C#, .NET, Python, React Native (Expo), React, and VueJs. Committed to transforming complex challenges into seamless, scalable interfaces that foster collaboration among remote teams. Passionate about leveraging AI and Web3 technologies to create impactful digital experiences that resonate with users." },
@@ -1720,7 +1720,7 @@
           nav: { profile: "Perfil", experience: "Experiencia", skills: "Habilidades", projects: "Proyectos", education: "Educación", references: "Referencias" },
           downloadPdf: "Descargar PDF",
           title: "Desarrollador Full Stack",
-          expStat: "5+ años de experiencia",
+          expStatSuffix: "años de experiencia",
           location: "Santo Domingo, República Dominicana",
           sections: { profile: "Perfil", employment: "Historial Laboral", skills: "Habilidades", languages: "Idiomas", projects: "Proyectos", education: "Educación", references: "Referencias" },
           profile: { text: "Desarrollador Full-Stack dinámico con 5 años de experiencia entregando soluciones innovadoras en aplicaciones web y móviles. Experto en mejorar la experiencia del usuario mediante implementación robusta de funciones y resolución de errores, utilizando tecnologías como Node.js, C#, .NET, Python, React Native (Expo), React y VueJs. Comprometido con transformar desafíos complejos en interfaces escalables que fomentan la colaboración entre equipos remotos. Apasionado por aprovechar las tecnologías de IA y Web3 para crear experiencias digitales impactantes." },
@@ -1762,6 +1762,13 @@
         return path.split(".").reduce((o, k) => (o || {})[k], obj);
       }
 
+      function getYearsExperience() {
+        const start = new Date(2020, 10, 1); // Nov 2020
+        const now = new Date();
+        const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+        return Math.ceil(months / 12);
+      }
+
       function applyLanguage(lang) {
         document.documentElement.lang = lang;
         document.documentElement.setAttribute("data-lang", lang);
@@ -1782,6 +1789,15 @@
 
         document.querySelectorAll(".lang-toggle [data-lang-btn]").forEach((btn) => {
           btn.classList.toggle("active", btn.getAttribute("data-lang-btn") === lang);
+        });
+
+        // Dynamic experience stat (Nov 2020)
+        document.querySelectorAll("[data-i18n-exp]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-exp");
+          const suffix = getNested(t, key);
+          if (key === "expStatSuffix" && suffix) {
+            el.textContent = getYearsExperience() + "+ " + suffix;
+          }
         });
       }
 
